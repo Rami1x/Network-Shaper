@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Network Builder</title>
+</head>
+<body>
+    <h1>Network Designer</h1>
+    <p>Summarize or check what IPs are available with your network.</p>
+
+    <hr>
+
+    <form action="/" method="POST">
+        <h3><b>Available Addresses</b></h3><br>
+
+        <input type="hidden" name="action" value="available">
+        <label for="ipaddr">IP Network Address</label><br>
+
+        <input for="text" id="ipaddr" name="ipaddr"><br>
+
+        <label for="subnet">Subnet Mask (example /24)</label><br>
+        <input type="text" id="subnet" name="subnet"><br>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <hr>
+
+    <form action="/" method="POST">
+        <h3>Summarize Address</h3>
+
+        <input type="hidden" name="action" value="summarize">
+
+        <label for="addrone">IP Address One</label><br>
+        <input type="text" id="addrone" name="addrone"><br>
+
+        <label for="addrtwo">IP Address Two</label><br>
+        <input type="text" id="addrtwo" name="addrtwo"><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+
+    <table border="1">
+
+        <tr>
+            <th>#</th>
+            <th>IP Addresses</th>
+        </tr>
+
+        {% for ip in addresses %}
+
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ ip }}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    {% if subnet is defined and subnet is not none %}
+
+        <h2>Summarized Subnet</h2>
+        <p>/{{ subnet }}</p>
+    {% endif %}
+    
+</body>
+</html>
